@@ -1,4 +1,5 @@
 import datetime
+from tsnorm import Normalizer
 
 def is_haiku(text):
     vowels = 'аоуыэяёюие'
@@ -38,6 +39,54 @@ def is_haiku(text):
                 return None
         haiku = haiku[:-2]
         return haiku
+
+def is_ring(text):
+    vowels = 'аоуыэяёюие'
+    sum_of_vowels = 0
+    for i in text: #count vowels in order to discard messages without exactly 7 vowels
+        if i in vowels:
+            sum_of_vowels += 1
+            if sum_of_vowels > 7:
+                return None
+
+    if sum_of_vowels == 7: #need seven vowels for обручальное кольцо
+        stress_mark = '+'
+        normalizer = Normalizer(stress_mark=stress_mark, stress_mark_pos="before", stress_yo=True, stress_monosyllabic=True)
+        stressed_text = normalizer(text)
+
+        for i in vowels: #list of syllables
+            stressed_text = stressed_text.replace(i, i + 'SpLiT')
+        stressed_text = stressed_text.replace(' ', ' ' + 'SpLiT')
+        splitted_text = stressed_text.split('SpLiT')
+
+#TODO: add vowels between syllabic sonorants and abbreviations' consonants
+
+        final_split = [] #merging ending consonants with open syllables to get closed syllables
+        current_syll = splitted_text[0]
+        for i in splitted_text[1:]:
+            if all([k not in i for k in vowels]): #if no vowel in syllable
+                current_syll += i
+            else:
+                final_split.append(current_syll)
+                current_syll = i
+        final_split.append(current_syll) #this is now list of syllables in phrase (with stress marks)
+
+        print(final_split)
+
+        #checking for the needed stress pattern here
+        #need stress in the final syllable and no stress in even-numbered syllables
+        #TODO: pattern is imperfect, needs rewriting
+        pattern = int(''.join(list(map(lambda x: '1' if '+' in x else '0', final_split))), 2)
+        if pattern & 0b101011 == 1: #bit mask things
+            return text
+        else:
+            return None
+
+
+    else:
+        return None
+
+
 
 def add_info(text, username):
     text_date = datetime.datetime.today().strftime('%d.%m.%Y')
