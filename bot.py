@@ -4,6 +4,10 @@ import checks
 
 bot = telebot.TeleBot(config.token)
 
+@bot.message_handler(commands=["info"])
+def info(message):
+    bot.reply_to(message, 'Этот бот ищет случайные хайку и обручальные кольца в сообщениях.')
+
 @bot.message_handler(content_types=["text"])
 def answer(message):
     if message.text.lower() == 'да':
