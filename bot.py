@@ -1,6 +1,7 @@
 import config
 import telebot
 import checks
+from save import save, Message_type
 
 bot = telebot.TeleBot(config.token)
 
@@ -17,6 +18,7 @@ def answer(message):
     if ring is not None:
         bot.reply_to(message, checks.add_info(telebot.formatting.mitalic('Непростое украшенье'), message.from_user.username), parse_mode='Markdown')
     if haiku is not None:
+        save(Message_type.haiku)
         bot.reply_to(message, checks.add_info(telebot.formatting.mitalic(haiku), message.from_user.username), parse_mode='Markdown')
 
 if __name__ == '__main__':
