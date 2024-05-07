@@ -10,8 +10,10 @@ def save(type:Message_type):
 
 def __read__(type):
     if type == Message_type.haiku:
-        with open('haiku.json', 'r') as f:
-            return json.load(f)
+        file_name = 'haiku.json'
     elif type == Message_type.ring:
-        with open('ring.json', 'r') as f:
-            return json.load(f)
+        file_name = 'ring.json'
+    else:
+        raise ValueError('Invalid file type')
+    with open(file_name, 'r') as f:
+        return json.load(f)
