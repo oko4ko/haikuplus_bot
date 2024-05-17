@@ -16,9 +16,10 @@ def answer(message):
     haiku = checks.is_haiku(message.text)
     ring = checks.is_ring(message.text)
     if ring is not None:
+        save(Message_type.haiku, message)
         bot.reply_to(message, checks.add_info(telebot.formatting.mitalic('Непростое украшенье'), message.from_user.username), parse_mode='Markdown')
     if haiku is not None:
-        save(Message_type.haiku)
+        save(Message_type.haiku, message)
         bot.reply_to(message, checks.add_info(telebot.formatting.mitalic(haiku), message.from_user.username), parse_mode='Markdown')
 
 if __name__ == '__main__':
