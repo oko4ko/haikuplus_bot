@@ -1,0 +1,3 @@
+Required libraries:
+pyTelegramBotApi 4.18.1+
+tsnorm 1.1.0+
