@@ -19,7 +19,9 @@ def info(message):
                           'Команды:\n'
                           '/info - показать информацию про бота\n'
                           '/get_haiku - получить хайку по ID. /get_haiku ID_хайку\n'
-                          '/get_ring - получить кольцо по ID. /get_haiku ID_кольца\n')
+                          '/get_ring - получить кольцо по ID. /get_haiku ID_кольца\n'
+                          '/remove_haiku - удалить хайку по ID. /get_haiku ID_хайку\n'
+                          '/remove_ring - удалить кольцо по ID. /get_haiku ID_кольца\n')
 
 
 @bot.message_handler(commands=["get_haiku"])
@@ -33,6 +35,20 @@ def get_haiku(message):
 def get_ring(message):
     art_ids = extract_arg(message.text)
     answer = get_art(MessageType.ring, art_ids, message.chat.id)
+    bot.reply_to(message, answer, parse_mode='Markdown')
+
+
+@bot.message_handler(commands=["remove_haiku"])
+def get_haiku(message):
+    art_ids = extract_arg(message.text)
+    answer = get_art(MessageType.haiku, art_ids, message.chat.id, remove=True)
+    bot.reply_to(message, answer, parse_mode='Markdown')
+
+
+@bot.message_handler(commands=["remove_ring"])
+def remove_ring(message):
+    art_ids = extract_arg(message.text)
+    answer = get_art(MessageType.ring, art_ids, message.chat.id, remove=True)
     bot.reply_to(message, answer, parse_mode='Markdown')
 
 

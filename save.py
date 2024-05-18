@@ -19,7 +19,7 @@ def save_art(message_type: MessageType, message, chat_id):
     return data[chat_id]["current_id"] - 1
 
 
-def get_art(message_type: MessageType, art_ids, chat_id):
+def get_art(message_type: MessageType, art_ids, chat_id, remove=False):
     chat_id = str(chat_id)
     if len(art_ids) == 0:
         if message_type == MessageType.haiku:
@@ -40,7 +40,15 @@ def get_art(message_type: MessageType, art_ids, chat_id):
     data = __read__(message_type)
     if data.get(chat_id) is None or data[chat_id].get(art_id) is None:
         return 'Ошибка: сообщения с указанным ID не существует, или оно было удалено'
-    return data[chat_id][art_id]
+    if remove:
+        del data[chat_id][art_id]
+        __write__(message_type, data)
+        if message_type == MessageType.haiku:
+            return 'Хайку удалено'
+        else:
+            return 'Кольцо удалено'
+    else:
+        return data[chat_id][art_id]
 
 
 def get_art_id(message_type: MessageType, chat_id):
