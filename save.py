@@ -10,7 +10,6 @@ class MessageType(Enum):
 def save_art(message_type: MessageType, message, chat_id):
     data = __read__(message_type)
     chat_id = str(chat_id)
-    print(data)
     if data.get(chat_id) is None:
         data[chat_id] = {"current_id": 1}
     data[chat_id][data[chat_id]["current_id"]] = message
