@@ -37,8 +37,6 @@ def get_art(message_type: MessageType, art_ids, chat_id):
 
     art_id = str(art_id)
 
-    print(chat_id, art_id)
-
     data = __read__(message_type)
     if data.get(chat_id) is None or data[chat_id].get(art_id) is None:
         return 'Ошибка: сообщения с указанным ID не существует, или оно было удалено'

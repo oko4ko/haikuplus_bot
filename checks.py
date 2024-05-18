@@ -33,7 +33,6 @@ def is_haiku(text):
 
                 haiku_string = haiku_string[:-1]
                 haiku_string += '\n\n'
-                print(haiku_string)
                 haiku += haiku_string
                 start_word_index = end_word_index
             else:
@@ -76,15 +75,17 @@ def is_ring(text):
                 current_syll = i
         final_split.append(current_syll)  # this is now list of syllables in phrase (with stress marks)
 
-        print(final_split)
-
         # checking for the needed stress pattern here
-        # need stress in the final syllable and no stress in even-numbered syllables
+        # 1.need stress in the final syllable and no stress in even-numbered syllables
+        # 2.stress in even-numbered syllables may occur between two stressed syllables
         pattern = int(''.join(list(map(lambda x: '1' if '+' in x else '0', final_split))), 2)
-        if pattern & 0b101011 == 1:  # bit mask things
+        if pattern & 0b101011 == 1:  # bit mask things for first condition
             return text
-        else:
-            return None
+        else:  # less elegant solution for checking all cases from the second condition
+            if pattern in [117, 113, 29, 93, 87, 71, 7, 23, 125, 119, 31, 95, 127]:
+                return text
+            else:
+                return None
     else:
         return None
 
