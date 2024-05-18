@@ -8,11 +8,11 @@ Adding rings manually is also supported.
 
 Commands:
 /info - Show info about the bot
-/get_haiku - get haiku from its ID. /get_haiku haiku_ID
-/get_ring - get ring from its ID. /get_ring ring_ID
-/remove_haiku - get haiku from its ID. /remove_haiku haiku_ID
-/remove_ring - get ring from its ID. /remove_ring ring_ID
-/custom_ring - mannually add a ring. THis command must be a reply to a message.
+/get_haiku - get haiku from its ID. (/get_haiku haiku_ID)
+/get_ring - get ring from its ID. (/get_ring ring_ID)
+/remove_haiku - get haiku from its ID. (/remove_haiku haiku_ID)
+/remove_ring - get ring from its ID. (/remove_ring ring_ID)
+/custom_ring - manually add a ring. This command must be a reply to a message.
 
 
 Launch guide:
