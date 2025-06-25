@@ -19,4 +19,5 @@ Launch guide:
 1. Create file config.py in root directory, put your Telegram API token there (token = "your_API_token")
 2. Create files haiku.json and ring.json in root directory
 
-Credits: Oleg Kochko, Diana Damindarova, Alexandra Yarova, Ekaterina Tkachenko, Faina Trebunskaya
+Credits: Oleg Kochko
+
