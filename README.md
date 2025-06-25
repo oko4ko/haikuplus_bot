@@ -1,6 +1,6 @@
 A bot for detecting and haikus and wedding rings in Telegram messages.
-A haiku is a message which can be divided into three lines with 5, 7 and 5 syllables respectfully
-A ring is a message which is equirithmic to the line "обручальное кольцо"
+A haiku is a message which can be divided into three lines with 5, 7 and 5 syllables respectfully.
+A ring is a message which is equirithmic to the line "обручальное кольцо".
 
 Upon detecting a haiku or a ring, the bot replies to it and saves its text.
 Previous haikus or rings may be requested by ID.
